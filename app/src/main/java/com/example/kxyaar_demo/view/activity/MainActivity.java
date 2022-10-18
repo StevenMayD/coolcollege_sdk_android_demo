@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     // 扫码
     public void click_scan(View view) {
         Log.d("TAG", "click_scan: " + "扫码");
-        textView.setText("扫码");
+        textView.setText("扫码...");
 
         NativeEventParams params = new NativeEventParams();
         params.methodName = "scan";
@@ -78,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
     // 获取位置信息
     public void click_getLocation(View view) {
         Log.d("TAG", "click_getLocation: " + "获取位置信息");
-        textView.setText("获取位置信息");
+        textView.setText("获取位置信息...");
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "getLocation";
+        params.methodData = "{}";
+
+        callModule(params);
     }
 
     // 统一调用API
