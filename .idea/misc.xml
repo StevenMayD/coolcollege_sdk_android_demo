@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../.gradle/caches/transforms-3/4cc95512ff3aef67a5606dd3adaead63/transformed/kxy/res/layout/k_activity_qrcode_scan.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>

@@ -40,4 +40,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // demo演示需要
+    implementation 'com.google.code.gson:gson:2.8.9' // 对象转json串
+
+    // aar架包需要
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])  // 引入酷学院aar架包
+    api 'cn.bingoogolapple:bga-qrcode-zxing:1.3.7' // 扫码（没有使用扫码api也需要引入依赖，aar中需要）
+    implementation 'com.yanzhenjie:permission:2.0.3' // 权限校验提醒
 }
