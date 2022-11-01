@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView; // api调用展示框
-    private String accessToken = "43707c097bdd4302a8b745d72b7381b8"; // 测试token（实际由前端调用方传递）
     private String enterpriseId = "1324923316665978965"; // 测试企业id（实际由前端调用方传递）
 
     @Override
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 统一调用API
     public void callModule(NativeEventParams params) {
-        APIModule.getAPIModule(this).moduleManage(params, accessToken, enterpriseId, 123, new KXYCallback() {
+        APIModule.getAPIModule(this).moduleManage(params, enterpriseId, 123, new KXYCallback() {
             // aar 无需跳转界面的api回调
             @Override
             public void onOKCallback(Object o) {
