@@ -16,8 +16,6 @@ import com.coolcollege.aar.selector.MediaSelector;
 import com.example.kxyaar_demo.R;
 import com.google.gson.Gson;
 
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     private TextView textView; // api调用展示框
     private String enterpriseId = "1324923316665978965"; // 测试企业id（实际由前端调用方传递）
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(new Gson().toJson(o));
+                        textView.setText(new Gson().toJson(o)); // uploadFile ok
                     }
                 });
             }
@@ -113,8 +111,20 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (data == null) return;
-        String text = new Gson().toJson(data.getParcelableExtra(MediaSelector.RESULT_DATA) != null ? data.getParcelableExtra(MediaSelector.RESULT_DATA) : data.getParcelableArrayListExtra(MediaSelector.RESULT_DATA));
-        text = (text != null && !("null".equals(text)))?text:data.getStringExtra(MediaSelector.RESULT_DATA);
-        textView.setText(text);
+
+        Object obj1 = data.getParcelableArrayListExtra(MediaSelector.RESULT_DATA); // chooseImage 返回ArrayList 否则null
+        Object obj2 = data.getStringExtra(MediaSelector.RESULT_DATA); // scan 返回String:https://mobile.coolcollege.cn/assets-share.html?short_link=https%3A%2F%2Fct12coolapi.coolcollege.cn%2Fenterprise-manage-api%2Fr%2F5520&eid=951057547274620933  否则null
+        Object obj3 = data.getParcelableExtra(MediaSelector.RESULT_DATA); // null
+
+        String text = null;
+        if (obj1 != null) {
+            text = new Gson().toJson(obj1); // chooseImage ok
+        } else if (obj2 != null) {
+            text = new Gson().toJson(obj2); // scan ok
+        } else if (obj3 != null) {
+            text = new Gson().toJson(obj3);
+        }
+        // 页面显示
+        if (text != null) { textView.setText(text); }
     }
 }
