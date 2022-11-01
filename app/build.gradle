@@ -41,11 +41,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    // demo演示需要
-    implementation 'com.google.code.gson:gson:2.8.9' // 对象转json串
-
     // aar架包需要
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])  // 引入酷学院aar架包
     api 'cn.bingoogolapple:bga-qrcode-zxing:1.3.7' // 扫码（没有使用扫码api也需要引入依赖，aar中需要）
     implementation 'com.yanzhenjie:permission:2.0.3' // 权限校验提醒
+    implementation 'me.yokeyword:fragmentationx:1.0.1'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    implementation 'com.blankj:utilcodex:1.28.4'
+    implementation 'com.github.bumptech.glide:glide:4.13.2' // 图片加载库
+    implementation 'com.lzy.net:okgo:3.0.4' // 请求框架（封装了okhttp的网络框架）
+    implementation 'com.google.code.gson:gson:2.8.9' // 对象转json串
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0' // 请求框架
+    implementation 'com.squareup.retrofit2:converter-jackson:2.3.0' // 请求框架
+    implementation 'com.aliyun.dpa:oss-android-sdk:2.9.5' // 阿里oss上传
+    implementation 'com.aliyun.video.android:upload:1.6.2' // 阿里vod视频点播上传
 }
