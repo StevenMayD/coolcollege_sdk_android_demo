@@ -60,7 +60,13 @@ public class MainActivity extends AppCompatActivity {
     // 系统分享
     public void click_shareUniversal(View view) {
         Log.d("TAG", "click_shareUniversal: " + "系统分享");
-        textView.setText("系统分享");
+        textView.setText("系统分享...");
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "shareMenu";
+        params.methodData = "{\"url\":\"https://sdn.coolcollege.cn/coolcollege-apps-share/hd/index.html?token=87fa67b66479891aa5f25a0ee86d01e6&kid=1810536062049718272&eid=1067985194709028888&aid=cool\",\"title\":\"sgyw图文课测试\",\"content\":\"QQ\",\"logo\":\"https://oss.coolcollege.cn/1810536106161213440.png\"}";
+
+        callModule(params);
     }
     // 扫码
     public void click_scan(View view) {
