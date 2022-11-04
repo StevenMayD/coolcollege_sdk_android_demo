@@ -13,6 +13,7 @@ import com.coolcollege.aar.bean.NativeEventParams;
 import com.coolcollege.aar.bean.PickImgBean;
 import com.coolcollege.aar.bean.PickVideoBean;
 import com.coolcollege.aar.bean.UploadFileBean;
+import com.coolcollege.aar.bean.VideoRecordBean;
 import com.coolcollege.aar.callback.KXYCallback;
 import com.coolcollege.aar.module.APIModule;
 import com.coolcollege.aar.selector.MediaSelector;
@@ -41,7 +42,16 @@ public class MainActivity extends AppCompatActivity {
     // 录制视频
     public void click_recordVideo(View view) {
         Log.d("TAG", "click_recordVideo: " + "录制视频");
-        textView.setText("录制视频");
+        textView.setText("录制视频...");
+
+        VideoRecordBean video = new VideoRecordBean();
+        video.maxDuration = 60;
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "startVideoRecord";
+        params.methodData = new Gson().toJson(video);
+
+        callModule(params);
     }
     // 获取图片（相机/相册）
     public void click_chooseImage(View view) {
