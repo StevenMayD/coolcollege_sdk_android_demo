@@ -78,7 +78,14 @@ public class MainActivity extends AppCompatActivity {
     // Oss文件上传（上传至阿里云）
     public void click_OSSUploadFile(View view) {
         Log.d("TAG", "click_OSSUploadFile: " + "Oss文件上传");
-        textView.setText("Oss文件上传");
+        textView.setText("Oss文件上传...");
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "OSSUploadFile";
+//        params.methodData = "{\"accessToken\":\"7a99aadff7dd458f92c79d5379e37ecb\",\"type\":\"image\",\"files\":[{\"filePath\": \"/storage/emulated/0/Pictures/Img_1658912796525eb22ca6b-c8d4-480c-a1de-96d9722bc2a1.jpeg\", \"objectKey\":\"lu011\"}]}";
+        params.methodData = "{\"accessToken\":\"7a99aadff7dd458f92c79d5379e37ecb\",\"type\":\"video\",\"files\":[{\"filePath\": \"/storage/emulated/0/Pictures/Screenshots/SVID_20221104_112754_1.mp4\", \"objectKey\":\"lu022\"}]}";
+        // image和video均验证通过：filePath: 上传文件不存在的话，上传进度视图的进度条始终0% 无法上传(后续优化，检测文件是否存在、实际调用文件都会存在)；     accessToken不正确的话：上传报错：{"error":"获取凭证失败，请稍后重试", "isError":true}
+        callModule(params);
     }
     // 系统分享
     public void click_shareUniversal(View view) {
