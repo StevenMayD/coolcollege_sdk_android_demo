@@ -12,11 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.coolcollege.aar.bean.NativeEventParams;
 import com.coolcollege.aar.bean.PickImgBean;
 import com.coolcollege.aar.bean.PickVideoBean;
+import com.coolcollege.aar.bean.UploadFileBean;
 import com.coolcollege.aar.callback.KXYCallback;
 import com.coolcollege.aar.module.APIModule;
 import com.coolcollege.aar.selector.MediaSelector;
 import com.example.kxyaar_demo.R;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView; // api调用展示框
@@ -73,7 +77,29 @@ public class MainActivity extends AppCompatActivity {
     // 通用文件上传（上传至指定接口）
     public void click_uploadFile(View view) {
         Log.d("TAG", "click_uploadFile: " + "通用文件上传");
-        textView.setText("通用文件上传");
+        textView.setText("通用文件上传...");
+
+        UploadFileBean uploadFileBean = new UploadFileBean();
+        uploadFileBean.name = "file";
+        uploadFileBean.url = "https://coolapi.coolcollege.cn/enterprise-api/common/upload";
+        uploadFileBean.filePath = "/storage/emulated/0/Pictures/Img_1658912796525eb22ca6b-c8d4-480c-a1de-96d9722bc2a1.jpeg";
+
+        Map<String, String> formMap = new HashMap<>();
+        formMap.put("access_token", "7a99aadff7dd458f92c79d5379e37ecb");
+        uploadFileBean.formData = formMap;
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "uploadFile";
+        params.methodData = new Gson().toJson(uploadFileBean);
+        /*
+        * {
+        * "code":0,
+        * "data":{"code":0,"error":"","extension":"jpeg","fileName":"Img_1658912796525eb22ca6b-c8d4-480c-a1de-96d9722bc2a1.jpeg","fileNewName":"1878954705053421568.jpeg","fileSize":"66709","fileThumbName":"","fileType":"image/jpeg","server":"https://oss.coolcollege.cn"},
+        *  "msg":"OK","success":true
+        * }
+        * 得到上传的图片地址：https://oss.coolcollege.cn/1878954705053421568.jpeg
+        * */
+        callModule(params);
     }
     // Oss文件上传（上传至阿里云）
     public void click_OSSUploadFile(View view) {
@@ -86,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
         params.methodData = "{\"accessToken\":\"7a99aadff7dd458f92c79d5379e37ecb\",\"type\":\"video\",\"files\":[{\"filePath\": \"/storage/emulated/0/Pictures/Screenshots/SVID_20221104_112754_1.mp4\", \"objectKey\":\"lu022\"}]}";
         // image和video均验证通过：filePath: 上传文件不存在的话，上传进度视图的进度条始终0% 无法上传(后续优化，检测文件是否存在、实际调用文件都会存在)；     accessToken不正确的话：上传报错：{"error":"获取凭证失败，请稍后重试", "isError":true}
         callModule(params);
+        /*
+        * 得到上传的图片地址：https://coolcollege-storage-hz.oss-accelerate.aliyuncs.com/lu011
+        * 得到上传的视频videoId
+        * */
     }
     // 系统分享
     public void click_shareUniversal(View view) {
