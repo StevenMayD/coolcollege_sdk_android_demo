@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.coolcollege.aar.bean.NativeEventParams;
+import com.coolcollege.aar.bean.PickImgBean;
+import com.coolcollege.aar.bean.PickVideoBean;
 import com.coolcollege.aar.callback.KXYCallback;
 import com.coolcollege.aar.module.APIModule;
 import com.coolcollege.aar.selector.MediaSelector;
@@ -40,12 +42,33 @@ public class MainActivity extends AppCompatActivity {
     // 获取图片（相机/相册）
     public void click_chooseImage(View view) {
         Log.d("TAG", "click_chooseImage: " + "获取图片");
-        textView.setText("获取图片");
+        textView.setText("获取图片...");
+
+        PickImgBean imgBean = new PickImgBean();
+        imgBean.count = 9;
+        imgBean.percent = 80;
+        imgBean.compressed = true;
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "chooseImage";
+        params.methodData = new Gson().toJson(imgBean);
+
+        callModule(params);
     }
     // 获取视频（相机/相册）
     public void click_chooseVideo(View view) {
         Log.d("TAG", "click_chooseVideo: " + "获取视频");
-        textView.setText("获取视频");
+        textView.setText("获取视频...");
+
+        PickVideoBean videoBean = new PickVideoBean();
+        videoBean.count = 9;
+        videoBean.maxDuration = 60;
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "chooseVideo";
+        params.methodData = new Gson().toJson(videoBean);
+
+        callModule(params);
     }
     // 通用文件上传（上传至指定接口）
     public void click_uploadFile(View view) {
