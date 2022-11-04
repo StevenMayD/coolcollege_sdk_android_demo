@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.coolcollege.aar.bean.AudioRecordBean;
 import com.coolcollege.aar.bean.NativeEventParams;
 import com.coolcollege.aar.bean.PickImgBean;
 import com.coolcollege.aar.bean.PickVideoBean;
@@ -37,7 +38,16 @@ public class MainActivity extends AppCompatActivity {
     // 录音
     public void click_recordAudio(View view) {
         Log.d("TAG", "click_recordAudio: " + "录音");
-        textView.setText("录音");
+        textView.setText("录音...");
+
+        AudioRecordBean audioRecordBean = new AudioRecordBean();
+        audioRecordBean.maxDuration = 10;
+
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "startAudioRecord";
+        params.methodData = new Gson().toJson(audioRecordBean);
+
+        callModule(params);
     }
     // 录制视频
     public void click_recordVideo(View view) {
