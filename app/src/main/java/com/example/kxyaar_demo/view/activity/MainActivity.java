@@ -19,6 +19,7 @@ import com.coolcollege.aar.callback.KXYCallback;
 import com.coolcollege.aar.module.APIModule;
 import com.coolcollege.aar.selector.MediaSelector;
 import com.example.kxyaar_demo.R;
+import com.example.kxyaar_demo.view.application.MyApplication;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -170,9 +171,51 @@ public class MainActivity extends AppCompatActivity {
         callModule(params);
     }
 
+    /** 震动 */
+    public void click_vibration(View view) {
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "vibration";
+        params.methodData = "{\"duration\":1000}";
+
+        callModule(params);
+    }
+
+    /** 复制信息并跳转微信 */
+    public void click_sendMessage(View view) {
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "sendMessage";
+        params.methodData = "{\"content\":\"何以\"}";
+
+        callModule(params);
+    }
+    /** 复制信息只粘贴板 */
+    public void click_copyMessage(View view) {
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "copyMessage";
+        params.methodData = "{\"content\":\"202302061817\",\"alert\":\"已复制信息至粘贴板\"}";
+
+        callModule(params);
+    }
+    /** 保存图片收相册 */
+    public void click_saveImage(View view) {
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "saveImage";
+        params.methodData = "{\"url\":\"https://tenfei04.cfp.cn/creative/vcg/veer/612/veer-310941708.jpg\"}";
+
+        callModule(params);
+    }
+    /** 获取手机系统信息 */
+    public void click_getSystemInfo(View view) {
+        NativeEventParams params = new NativeEventParams();
+        params.methodName = "getSystemInfo";
+        params.methodData = "{}";
+
+        callModule(params);
+    }
+
     // 统一调用API
     public void callModule(NativeEventParams params) {
-        APIModule.getAPIModule(this).moduleManage(params, enterpriseId, 123, new KXYCallback() {
+        APIModule.getAPIModule(this, MyApplication.get()).moduleManage(params, enterpriseId, 123, new KXYCallback() {
             // aar 无需跳转界面的api回调
             @Override
             public void onOKCallback(Object o) {
